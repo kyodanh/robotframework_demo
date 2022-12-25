@@ -3,11 +3,22 @@ Library  SeleniumLibrary
 Library  SeleniumLibrary
 
 *** Variables ***
+${brower}   chrome
+${url}      https://www.saucedemo.com/
+
 
 *** Test Cases ***
 LoginTest
-#   create webdriver  chrome  executable_path="D:\pythonProject\driver\chromedriver.exe"
-   open browser     https://www.saucedemo.com/   chrome
+   open browser     ${url}      ${brower}
+   Logintoweb
+   close browser
+
+
+
+
+
+*** Keywords ***
+Logintoweb
    click element    xpath://*[@id="user-name"]
    input text       xpath://*[@id="user-name"]  standard_user
    click element    xpath://*[@id="password"]
@@ -15,9 +26,3 @@ LoginTest
    click element    xpath://*[@id="login-button"]
    ${name}=  get text         xpath://*[@id="header_container"]/div[2]/span
    log to console  ${name}
-
-
-   close browser
-
-
-*** Keywords ***
